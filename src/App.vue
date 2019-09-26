@@ -1,17 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav>
+      <button v-if="!loggedIn" @click="goRouter('home')">Home</button>
+      <button v-if="!loggedIn" @click="goRouter('register')">Register</button>
+      <button v-if="!loggedIn" @click="goRouter('login')">Login</button>
+      <button v-if="loggedIn" @click="goRouter('dashboard')">Dashboard</button>
+      <button v-if="loggedIn" @click="goRouter('account')">Account</button>      
+      <button v-if="loggedIn" @click="logoutUser">Logout</button>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  methods: {
+    ...mapActions('user', [
+      'logout'
+    ]),
+    goRouter (name) {
+      if(name != this.$route.name) {
+        return this.$router.push({ name })
+      }
+    },
+    logoutUser () {
+      // eslint-disable-next-line
+      console.log('logout')
+      this.logout()
+    }
+  },
+  computed: {
+    ...mapGetters('user', [
+      'loggedIn'
+    ])
   }
 }
 </script>
