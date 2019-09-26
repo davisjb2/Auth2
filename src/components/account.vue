@@ -1,23 +1,36 @@
 <template>
-  <div>
-    <h1>Account Page</h1>
-    <label for="name">Name</label>
-    <input :disabled="disabled" type="text" name="username" v-model="user.username">
-    <br>
-    <label for="email">Email</label>    
-    <input :disabled="disabled" type="email" name="email" v-model="user.email">
-    <br>    
-    <label for="password">Password</label>    
-    <input :disabled="disabled" type="password" name="password" v-model="user.password">
-    <br>    
-    <label for="firstName">First Name</label>    
-    <input :disabled="disabled" type="text" name="firstName" v-model="user.firstName">
-    <br>    
-    <label for="lastName">Last Name</label>    
-    <input :disabled="disabled" type="text" name="lastName" v-model="user.lastName">
-    <br>
-    <button v-if="!disabled" @click="submit">Submit</button>
-    <button v-else @click="edit">Edit</button>
+  <div class="section">
+    <div class="container">
+      <h1 class="title">Account Page</h1>
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column">
+          <b-field label="Name" label-position="on-border">
+            <b-input :disabled="disabled" type="text" name="username" v-model="user.username"></b-input>
+          </b-field>
+          <b-field label="Email" label-position="on-border">
+            <b-input :disabled="disabled" type="email" name="email" v-model="user.email"></b-input>
+          </b-field>
+          <b-field label="Password" label-position="on-border">
+            <b-input :disabled="disabled" type="password" name="password" v-model="user.password"></b-input>
+          </b-field>
+          <b-field label="First Name" label-position="on-border">
+            <b-input :disabled="disabled" type="text" name="firstName" v-model="user.firstName"></b-input>
+          </b-field>
+          <b-field label="Last Name" label-position="on-border">
+            <b-input :disabled="disabled" type="lastName" name="lastName" v-model="user.lastName"></b-input>
+          </b-field>
+          <br>
+          <b-button tag="input" v-if="disabled" class="button is-info"
+                native-type="submit" @click="edit"
+                value="Edit" />
+          <b-button tag="input" v-else class="button is-info"
+                native-type="submit" @click="submit"
+                value="Submit" />                
+        </div>
+        <div class="column"></div>
+      </div>
+    </div>
   </div>
 </template>
 

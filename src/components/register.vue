@@ -1,22 +1,33 @@
 <template>
-  <div>
-    <h1>Register Page</h1>
-    <label for="name">Name</label>
-    <input type="text" name="username" v-model="user.username">
-    <br>
-    <label for="email">Email</label>    
-    <input type="email" name="email" v-model="user.email">
-    <br>    
-    <label for="password">Password</label>    
-    <input type="password" name="password" v-model="user.password">
-    <br>    
-    <label for="firstName">First Name</label>    
-    <input type="text" name="firstName" v-model="user.firstName">
-    <br>    
-    <label for="lastName">Last Name</label>    
-    <input type="text" name="lastName" v-model="user.lastName">
-    <br>
-    <button @click="submit">Submit</button>
+  <div class="section">
+    <div class="container">
+      <h1 class="title">Register Page</h1>
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column">
+          <b-field label="Name" label-position="on-border">
+            <b-input type="text" name="username" v-model="user.username"></b-input>
+          </b-field>
+          <b-field label="Email" label-position="on-border">
+            <b-input type="email" name="email" v-model="user.email"></b-input>
+          </b-field>
+          <b-field label="Password" label-position="on-border">
+            <b-input type="password" name="password" v-model="user.password"></b-input>
+          </b-field>
+          <b-field label="First Name" label-position="on-border">
+            <b-input type="text" name="firstName" v-model="user.firstName"></b-input>
+          </b-field>
+          <b-field label="Last Name" label-position="on-border">
+            <b-input type="lastName" name="lastName" v-model="user.lastName"></b-input>
+          </b-field>
+          <br>
+          <b-button tag="input" class="button is-info"
+                native-type="submit" @click="submit"
+                value="Submit" />
+        </div>
+        <div class="column"></div>
+      </div>
+    </div>
   </div>
 </template>
 

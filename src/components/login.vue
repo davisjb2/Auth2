@@ -1,13 +1,23 @@
 <template>
-  <div>
-    <h1>Login Page</h1>
-    <label for="email">Email or Username</label>    
-    <input type="text" name="email" v-model="user.email">
-    <br>    
-    <label for="password">Password</label>    
-    <input type="password" name="password" v-model="user.password">
-    <br>
-    <button @click="submit">Submit</button>    
+  <div class="section">
+    <div class="container">
+      <h1 class="title">Login Page</h1>
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column">
+          <b-field label="Name" label-position="on-border">
+            <b-input type="text" name="username" v-model="user.username"></b-input>
+          </b-field>
+          <b-field label="Password" label-position="on-border">
+            <b-input type="password" name="password" v-model="user.password"></b-input>
+          </b-field>
+          <b-button tag="input" class="button is-info"
+                native-type="submit" @click="submit"
+                value="Submit" />            
+        </div>
+        <div class="column"></div>
+      </div>
+    </div>
   </div>
 </template>
 

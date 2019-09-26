@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Dashboard Page</h1>
+    <h1 class="title">Dashboard Page</h1>
+    <img src="../assets/Design1.jpg">
   </div>
 </template>
 

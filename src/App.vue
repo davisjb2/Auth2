@@ -1,13 +1,45 @@
 <template>
   <div id="app">
-    <nav>
-      <button v-if="!loggedIn" @click="goRouter('home')">Home</button>
-      <button v-if="!loggedIn" @click="goRouter('register')">Register</button>
-      <button v-if="!loggedIn" @click="goRouter('login')">Login</button>
-      <button v-if="loggedIn" @click="goRouter('dashboard')">Dashboard</button>
-      <button v-if="loggedIn" @click="goRouter('account')">Account</button>      
-      <button v-if="loggedIn" @click="logoutUser">Logout</button>
-    </nav>
+    <b-navbar>
+        <template slot="brand">
+            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+                <img
+                    src="./assets/logo.png"
+                >
+            </b-navbar-item>
+        </template>
+        <template slot="start">
+            <b-navbar-item tag="div">
+                <div class="buttons">
+                    <button v-if="!loggedIn" @click="goRouter('home')" class="button is-info diff-button">
+                        <strong>Home</strong>
+                    </button>
+                    <button v-if="loggedIn" @click="goRouter('dashboard')" class="button is-info diff-button">
+                        Dashboard
+                    </button>
+                    <button v-if="loggedIn" @click="goRouter('account')" class="button is-light diff-button">
+                        Account
+                    </button>                    
+                </div>
+            </b-navbar-item>
+        </template>
+
+        <template slot="end">
+            <b-navbar-item tag="div">
+                <div class="buttons">
+                    <button v-if="!loggedIn" @click="goRouter('register')" class="button is-info">
+                        <strong>Sign up</strong>
+                    </button>
+                    <button v-if="!loggedIn" @click="goRouter('login')" class="button is-light">
+                        Log in
+                    </button>
+                    <button v-if="loggedIn" @click="logoutUser" class="button is-light">
+                        Logout
+                    </button>                    
+                </div>
+            </b-navbar-item>
+        </template>
+    </b-navbar>
     <router-view></router-view>
   </div>
 </template>
@@ -47,5 +79,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.diff-button {
+  background: none !important;
+  color: black !important;
+  border: none !important;
 }
 </style>
