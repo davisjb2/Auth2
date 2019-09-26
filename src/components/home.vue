@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Home Page</h1>
+    <h1 class="title">Welcome!</h1>
+    <h1 class="subtitle">Please login or signup!</h1>
   </div>
 </template>
 

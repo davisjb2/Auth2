@@ -7,6 +7,7 @@ import logout from '@/components/logout'
 import register from '@/components/register'
 import account from '@/components/account'
 import checkAuth from '../common/checkAuth'
+import tasks from '@/components/tasks'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ const router = new Router({
             path: '/account',
             name: 'account',
             component: account
+        },
+        {
+            path: '/tasks',
+            name: 'tasks',
+            component: tasks
         }
     ]
 })

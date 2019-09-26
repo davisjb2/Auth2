@@ -1,0 +1,79 @@
+<template>
+    <div class="section">
+        <div class="container">
+            <h1 class="title">Tasks</h1>
+            <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
+            <b-table :data="data" :columns="columns"></b-table>
+        </div>
+
+         <b-modal :active.sync="modalActive" has-modal-card>
+            <modal-form v-bind="formProps"></modal-form>
+        </b-modal>
+    </div>
+</template>
+
+<script>
+//import { mapActions, mapGetters } from 'vuex'
+import modalForm from 'task'
+export default {
+  name: 'tasks',
+  data() {
+            return {
+                data: [
+                    { 'id': 1, 'name': 'Paper', 'due date': '2019-10-15 11:59:99', 'completed': 'true' },
+                    { 'id': 2, 'name': 'Program', 'due date': '2019-09-07 11:59:99', 'completed': 'true' },
+                    { 'id': 3, 'name': 'Big Program', 'due date': '2019-11-22 11:59:99', 'completed': 'false' },
+                    { 'id': 4, 'name': 'Forum Post', 'due date': '2019-09-17 11:59:99', 'completed': 'true' },
+                    { 'id': 5, 'name': 'Project', 'due date': '2019-12-02 11:59:99', 'completed': 'false' },                                                            
+                ],
+                columns: [
+                    {
+                        field: 'id',
+                        label: 'ID',
+                        width: '40',
+                        numeric: true
+                    },
+                    {
+                        field: 'name',
+                        label: 'Title',
+                    },
+                    {
+                        field: 'due date',
+                        label: 'Due Date',
+                    },
+                    {
+                        field: 'completed',
+                        label: 'Completed',
+                        centered: true
+                    }
+                ],
+                modalActive: false
+            }
+  },
+  components: {
+      modalForm
+  },
+  methods: {
+    create() {
+
+    }
+  },
+  computed: {
+    
+  },
+  watch: {
+    
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
