@@ -3,18 +3,18 @@
         <div class="container">
             <h1 class="title">Tasks</h1>
             <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
-            <b-table :data="data" :columns="columns"></b-table>
+            <b-table :data="data" :columns="columns" @select="create"></b-table>
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
-            <modal-form v-bind="formProps"></modal-form>
+            <modal-form></modal-form>
         </b-modal>
     </div>
 </template>
 
 <script>
 //import { mapActions, mapGetters } from 'vuex'
-import modalForm from 'task'
+import modalForm from '../components/task'
 export default {
   name: 'tasks',
   data() {
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     create() {
-
+        this.modalActive = true;
     }
   },
   computed: {
