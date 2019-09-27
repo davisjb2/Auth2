@@ -49,8 +49,6 @@ export default {
       this.createTask(data)
         .then((res) => {
           this.$parent.close()
-          // eslint-disable-next-line
-          console.log(res)
         }).catch((e) => {
           // eslint-disable-next-line
           console.error(e)

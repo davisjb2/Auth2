@@ -32,7 +32,7 @@ export default {
                         label: 'Title',
                     },
                     {
-                        field: 'due date',
+                        field: 'dueDate',
                         label: 'Due Date',
                     },
                     {
@@ -61,14 +61,16 @@ export default {
     ])
   },
   watch: {
-    tasks() {
+    getTasks() {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+        /* eslint-disable */
+        console.log("taskData updated")
     }
   },
   mounted () {
       this.taskData = JSON.parse(JSON.stringify(this.getTasks))
       /* eslint-disable */
-      console.log(this.getTasks())
+      console.log("taskData mounted")
   }
 }
 </script>
