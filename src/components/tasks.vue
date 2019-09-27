@@ -13,19 +13,13 @@
 </template>
 
 <script>
-//import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import modalForm from '../components/task'
 export default {
   name: 'tasks',
   data() {
             return {
-                taskData: [
-                    { 'id': 1, 'name': 'Paper', 'due date': '2019-10-15 11:59:99', 'completed': 'true' },
-                    { 'id': 2, 'name': 'Program', 'due date': '2019-09-07 11:59:99', 'completed': 'true' },
-                    { 'id': 3, 'name': 'Big Program', 'due date': '2019-11-22 11:59:99', 'completed': 'false' },
-                    { 'id': 4, 'name': 'Forum Post', 'due date': '2019-09-17 11:59:99', 'completed': 'true' },
-                    { 'id': 5, 'name': 'Project', 'due date': '2019-12-02 11:59:99', 'completed': 'false' },                                                            
-                ],
+                taskData: [],
                 columns: [
                     {
                         field: 'id',
@@ -62,10 +56,19 @@ export default {
     }
   },
   computed: {
-    
+    ...mapGetters('task', [
+        'getTasks'
+    ])
   },
   watch: {
-    
+    tasks() {
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+    }
+  },
+  mounted () {
+      this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+      /* eslint-disable */
+      console.log(this.getTasks())
   }
 }
 </script>

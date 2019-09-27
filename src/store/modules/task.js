@@ -31,7 +31,7 @@ const actions = {
 }
 
 const getters = {
-    tasks (state) {
+    getTasks (state) {
         return state.tasks
     }
 }
