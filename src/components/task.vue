@@ -4,13 +4,13 @@
             <p class="modal-card-title">New Task</p>
         </header>
         <section class="modal-card-body">
-            <b-field label="Name">
+            <b-field label="Name" label-position="on-border">
                 <b-input
                     type="text"
                     v-model="task.name">
                 </b-input>
             </b-field>
-            <b-field label="Due Date">
+            <b-field label="Due Date" label-position="on-border">
                 <b-datepicker
                     icon="calendar-today" v-model="task.dueDate">
                 </b-datepicker>
@@ -40,15 +40,15 @@ export default {
   },
   methods: {
     ...mapActions('task', [
-      'create'
+      'createTask'
     ]),
     create () {
       const data = this.task
       // eslint-disable-next-line
       console.log(JSON.stringify(data, null, 2))
-      this.create(data)
+      this.createTask(data)
         .then((res) => {
-          $parent.close()
+          this.$parent.close()
           // eslint-disable-next-line
           console.log(res)
         }).catch((e) => {

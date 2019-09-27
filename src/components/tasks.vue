@@ -3,7 +3,7 @@
         <div class="container">
             <h1 class="title">Tasks</h1>
             <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
-            <b-table :data="data" :columns="columns" @select="create"></b-table>
+            <b-table :data="taskData" :columns="columns" @select="edit()"></b-table>
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
@@ -19,7 +19,7 @@ export default {
   name: 'tasks',
   data() {
             return {
-                data: [
+                taskData: [
                     { 'id': 1, 'name': 'Paper', 'due date': '2019-10-15 11:59:99', 'completed': 'true' },
                     { 'id': 2, 'name': 'Program', 'due date': '2019-09-07 11:59:99', 'completed': 'true' },
                     { 'id': 3, 'name': 'Big Program', 'due date': '2019-11-22 11:59:99', 'completed': 'false' },
@@ -56,6 +56,9 @@ export default {
   methods: {
     create() {
         this.modalActive = true;
+    },
+    edit() {
+
     }
   },
   computed: {

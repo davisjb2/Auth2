@@ -3,10 +3,10 @@ const state = {
 }
 
 const mutations = {
-    'CREATE' (state, data) {
-        state.task.push(data)
+    'CREATE_TASK' (state, data) {
+        state.tasks.push(data)
     },
-    'DELETE' (state, id) {
+    'DELETE_TASK' (state, id) {
         state.tasks.filter(function(e) {
             return e.id != id
         })
@@ -14,19 +14,19 @@ const mutations = {
 }
 
 const actions = {
-    async create ({ commit }, task) {
+    async createTask ({ commit }, task) {
         // eslint-disable-next-line
         console.log(task)
-        commit('CREATE', task)
+        commit('CREATE_TASK', task)
     },
-    async update ({ commit }, task) {
+    async updateTask ({ commit }, task) {
         // eslint-disable-next-line
         console.log(task)
     },
-    async delete ({ commit }, id) {
+    async deleteTask ({ commit }, id) {
         // eslint-disable-next-line
         console.log(id)
-        commit('DELETE', id)
+        commit('DELETE_TASK', id)
     }
 }
 
