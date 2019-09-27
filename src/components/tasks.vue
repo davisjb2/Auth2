@@ -3,17 +3,18 @@
         <div class="container">
             <h1 class="title">Tasks</h1>
             <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
-            <b-table :data="taskData" :columns="columns" @select="edit()"></b-table>
+            <b-table :data="taskData" :columns="columns" @select="edit"></b-table>
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
             <modal-form></modal-form>
         </b-modal>
+        
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import modalForm from '../components/task'
 export default {
   name: 'tasks',
@@ -48,11 +49,14 @@ export default {
       modalForm
   },
   methods: {
+    ...mapActions('task', [
+        'updateTask'
+    ]),
     create() {
         this.modalActive = true;
     },
-    edit() {
-
+    edit(res) {
+        this.updateTask(res);
     }
   },
   computed: {
@@ -63,8 +67,6 @@ export default {
   watch: {
     getTasks() {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks))
-        /* eslint-disable */
-        console.log("taskData updated")
     }
   },
   mounted () {

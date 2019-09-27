@@ -4,6 +4,7 @@ const state = {
 
 const mutations = {
     'CREATE_TASK' (state, data) {
+        data.id = state.tasks.length
         state.tasks.push(data)
     },
     'DELETE_TASK' (state, id) {
@@ -19,15 +20,17 @@ const actions = {
         console.log(task)
         commit('CREATE_TASK', task)
     },
+    // eslint-disable-next-line    
     async updateTask ({ commit }, task) {
         // eslint-disable-next-line
         console.log(task)
     },
+    // eslint-disable-next-line
     async deleteTask ({ commit }, id) {
         // eslint-disable-next-line
         console.log(id)
         commit('DELETE_TASK', id)
-    }
+    },
 }
 
 const getters = {
