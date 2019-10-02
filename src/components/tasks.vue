@@ -7,15 +7,20 @@
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
-            <modal-form></modal-form>
+            <create-task></create-task>
         </b-modal>
+
+         <b-modal :active.sync="modalEditActive" has-modal-card>
+            <edit-task v-bind="formProps"></edit-task>
+        </b-modal>        
         
     </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import modalForm from '../components/task'
+import { mapGetters } from 'vuex'
+import createTask from '../components/createTask'
+import editTask from '../components/editTask'
 export default {
   name: 'tasks',
   data() {
@@ -42,21 +47,29 @@ export default {
                         centered: true
                     }
                 ],
-                modalActive: false
+                modalActive: false,
+                modalEditActive: false,
+                formProps: {
+                    task: {
+                        id: 0,
+                        dueDate: '',
+                        name: '',
+                        completed: false
+                    }                    
+                }
             }
   },
   components: {
-      modalForm
+      createTask,
+      editTask
   },
   methods: {
-    ...mapActions('task', [
-        'updateTask'
-    ]),
     create() {
         this.modalActive = true;
     },
     edit(res) {
-        this.updateTask(res);
+        this.formProps.task = res;
+        this.modalEditActive = true;
     }
   },
   computed: {

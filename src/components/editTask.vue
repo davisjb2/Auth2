@@ -1,7 +1,7 @@
 <template>
     <div class="modal-card" style="width: auto">
         <header class="modal-card-head">
-            <p class="modal-card-title">New Task</p>
+            <p class="modal-card-title">Edit Task</p>
         </header>
         <section class="modal-card-body">
             <b-field label="Name" label-position="on-border">
@@ -20,7 +20,7 @@
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
-            <button class="button is-primary" @click="create">Create</button>
+            <button class="button is-primary" @click="edit">Edit</button>
         </footer>
     </div>
 </template>
@@ -28,25 +28,17 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'register',
-  data () {
-    return {
-      task: {
-        name: '',
-        completed: false,
-        dueDate: new Date()
-      }
-    }
-  },
+  name: 'edit',
+  props: ['task'],
   methods: {
     ...mapActions('task', [
-      'createTask'
+      'updateTask'
     ]),
-    create () {
+    edit () {
       const data = this.task
       // eslint-disable-next-line
-      console.log(JSON.stringify(data, null, 2))
-      this.createTask(data)
+      //console.log(JSON.stringify(data, null, 2))
+      this.updateTask(data)
         .then((res) => {
           this.$parent.close()
         }).catch((e) => {
