@@ -8,6 +8,7 @@ import register from '@/components/register'
 import account from '@/components/account'
 import checkAuth from '../common/checkAuth'
 import tasks from '@/components/tasks'
+import tasksMove from '@/components/tasksMove'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ const router = new Router({
             path: '/tasks',
             name: 'tasks',
             component: tasks
+        },
+        {
+            path: '/tasksMove',
+            name: 'tasksMove',
+            component: tasksMove
         }
     ]
 })

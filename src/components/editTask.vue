@@ -36,10 +36,8 @@ export default {
     ]),
     edit () {
       const data = this.task
-      // eslint-disable-next-line
-      //console.log(JSON.stringify(data, null, 2))
       this.updateTask(data)
-        .then((res) => {
+        .then(() => {
           this.$parent.close()
         }).catch((e) => {
           // eslint-disable-next-line

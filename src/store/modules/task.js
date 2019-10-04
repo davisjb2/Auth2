@@ -12,6 +12,10 @@ const mutations = {
             return e.id != id
         })
     },
+    'UPDATE_TASK' (state, data) {
+        var index = state.tasks.findIndex(e => e.id === data.id)
+        state.tasks[index] = data
+    },
 }
 
 const actions = {
@@ -24,6 +28,7 @@ const actions = {
     async updateTask ({ commit }, task) {
         // eslint-disable-next-line
         console.log(task)
+        commit('UPDATE_TASK', task)        
     },
     // eslint-disable-next-line
     async deleteTask ({ commit }, id) {

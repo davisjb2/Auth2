@@ -34,7 +34,8 @@ export default {
       task: {
         name: '',
         completed: false,
-        dueDate: new Date()
+        dueDate: new Date(),
+        lane: 0
       }
     }
   },
@@ -47,7 +48,7 @@ export default {
       // eslint-disable-next-line
       console.log(JSON.stringify(data, null, 2))
       this.createTask(data)
-        .then((res) => {
+        .then(() => {
           this.$parent.close()
         }).catch((e) => {
           // eslint-disable-next-line
