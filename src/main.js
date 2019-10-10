@@ -4,7 +4,10 @@ import router from './router'
 import store from './store/store.js'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-//import './../node_modules/bulma/css/bulma.css';
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:8081/api/'
+axios.defaults.withCredentials = true
 
 Vue.use(Buefy)
 

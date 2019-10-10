@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const state = {
     user: {
         username: '',
@@ -28,18 +30,40 @@ const mutations = {
 
 const actions = {
     async register ({ commit }, user) {
+        const userResult = await axios.post('/auth/register', { username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, email: user.email })
+        if(userResult.data.status == 200) 
+        {
+            commit('LOGIN', { username: userResult.data.result.username, password: userResult.data.result.password, firstName: userResult.data.result.firstName, lastName: userResult.data.result.lastName, email: userResult.data.result.email })
+            return { success: true }
+        }
         // eslint-disable-next-line
-        console.log(user)
-        commit('LOGIN', user)
+        console.log('error creating account', userResult)
+        commit('application/ERROR', userResult.data.error)
+        return { success: false }
     },
     async login ({ commit }, user) {
+        const userResult = await axios.post('/auth/login', { username: user.email, password: user.password })
+        if(userResult.data.status == 200) 
+        {
+            commit('LOGIN', { username: userResult.data.result.username, password: userResult.data.result.password, firstName: userResult.data.result.firstName, lastName: userResult.data.result.lastName, email: userResult.data.result.email })
+            return { success: true }
+        }
         // eslint-disable-next-line
-        console.log(user)
-        commit('LOGIN', user)
+        console.log('error logging in', userResult)
+        commit('application/ERROR', userResult.data.error)
+        return { success: false }
     },
     async logout ({ commit }) {
+        const userResult = await axios.get('/auth/logout')
+        if(userResult.data.status == 200) 
+        {
+            commit('LOGOUT')
+            return { success: true }
+        }
         // eslint-disable-next-line
-        commit('LOGOUT')
+        console.log('error logging out', userResult)
+        commit('application/ERROR', userResult.data.error)
+        return { success: false }
     },
      // eslint-disable-next-line
     async updateAccount ({ commit }, user) {
