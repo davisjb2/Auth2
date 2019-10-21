@@ -5,8 +5,8 @@
       <div class="columns">
         <div class="column"></div>
         <div class="column">
-          <b-field label="Name" label-position="on-border">
-            <b-input type="text" name="username" v-model="user.email"></b-input>
+          <b-field label="Email" label-position="on-border">
+            <b-input type="text" name="email" v-model="user.email"></b-input>
           </b-field>
           <b-field label="Password" label-position="on-border">
             <b-input type="password" name="password" v-model="user.password"></b-input>

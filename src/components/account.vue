@@ -5,9 +5,6 @@
       <div class="columns">
         <div class="column"></div>
         <div class="column">
-          <b-field label="Name" label-position="on-border">
-            <b-input :disabled="disabled" type="text" name="username" v-model="user.username"></b-input>
-          </b-field>
           <b-field label="Email" label-position="on-border">
             <b-input :disabled="disabled" type="email" name="email" v-model="user.email"></b-input>
           </b-field>
@@ -41,7 +38,6 @@ export default {
   data () {
     return {
       user: {
-        username: '',
         email: '',
         password: '',
         firstName: '',
@@ -60,7 +56,9 @@ export default {
       console.log(JSON.stringify(data, null, 2))
       this.updateAccount(data)
         .then((res) => {
-          alert(res)
+          console.log(res)
+          this.disabled = true
+          this.user = JSON.parse(JSON.stringify(this.getUser))
         }).catch((e) => {
           // eslint-disable-next-line          
           console.error(e)
@@ -84,7 +82,7 @@ export default {
     }
   },
   mounted () {
-
+    console.log(this.getUser)
     this.user = JSON.parse(JSON.stringify(this.getUser))
   }
 }

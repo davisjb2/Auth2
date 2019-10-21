@@ -6,7 +6,6 @@ const state = {
 
 const mutations = {
     'CREATE_TASK' (state, data) {
-        data.id = state.tasks.length
         state.tasks.push(data)
     },
     'DELETE_TASK' (state, id) {
@@ -42,7 +41,7 @@ const actions = {
             return { success: true }
         }
         // eslint-disable-next-line
-        console.log("Error updating task")
+        console.log("Error updating task", taskResult.data.error)
         commit('application/ERROR', 'Error updating task')
         return { success: false }  
     },

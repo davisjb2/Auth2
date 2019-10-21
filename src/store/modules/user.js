@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const state = {
     user: {
-        username: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -18,7 +17,6 @@ const mutations = {
     },
     'LOGOUT' (state) {
         state.user = {
-            username: '',
             firstName: '',
             lastName: '',
             email: '',
@@ -26,6 +24,9 @@ const mutations = {
         }
         state.loggedIn = false
     },
+    'UPDATE_USER' (state, data) {
+        state.user = data
+    }
 }
 
 const actions = {
@@ -42,7 +43,7 @@ const actions = {
         return { success: false }
     },
     async login ({ commit }, user) {
-        const userResult = await axios.post('/auth/login', { username: user.email, password: user.password })
+        const userResult = await axios.post('/auth/login', { email: user.email, password: user.password })
         if(userResult.data.status == 200) 
         {
             commit('LOGIN', { username: userResult.data.result.username, password: userResult.data.result.password, firstName: userResult.data.result.firstName, lastName: userResult.data.result.lastName, email: userResult.data.result.email })
@@ -67,8 +68,16 @@ const actions = {
     },
      // eslint-disable-next-line
     async updateAccount ({ commit }, user) {
+        const userResult = await axios.post(`/auth/update/`, user)
+        if(userResult.data.status == 200)
+        {
+            commit('UPDATE_USER', userResult.data.result)
+            return { success: true }
+        }
         // eslint-disable-next-line
-        console.log(user)
+        console.log("Error updating user", userResult.data.error)
+        commit('application/ERROR', 'Error updating user')
+        return { success: false }  
     }
 }
 
