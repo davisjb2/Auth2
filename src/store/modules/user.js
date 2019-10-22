@@ -31,10 +31,10 @@ const mutations = {
 
 const actions = {
     async register ({ commit }, user) {
-        const userResult = await axios.post('/auth/register', { username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, email: user.email })
+        const userResult = await axios.post('/auth/register', user)
         if(userResult.data.status == 200) 
         {
-            commit('LOGIN', { username: userResult.data.result.username, password: userResult.data.result.password, firstName: userResult.data.result.firstName, lastName: userResult.data.result.lastName, email: userResult.data.result.email })
+            commit('LOGIN', userResult.data.result )
             return { success: true }
         }
         // eslint-disable-next-line
@@ -43,10 +43,10 @@ const actions = {
         return { success: false }
     },
     async login ({ commit }, user) {
-        const userResult = await axios.post('/auth/login', { email: user.email, password: user.password })
+        const userResult = await axios.post('/auth/login', user)
         if(userResult.data.status == 200) 
         {
-            commit('LOGIN', { username: userResult.data.result.username, password: userResult.data.result.password, firstName: userResult.data.result.firstName, lastName: userResult.data.result.lastName, email: userResult.data.result.email })
+            commit('LOGIN', userResult.data.result)
             return { success: true }
         }
         // eslint-disable-next-line
@@ -56,7 +56,7 @@ const actions = {
     },
     async logout ({ commit }) {
         const userResult = await axios.get('/auth/logout')
-        if(userResult.data.status == 200) 
+        if(userResult.data.status == 200)
         {
             commit('LOGOUT')
             return { success: true }
@@ -78,6 +78,15 @@ const actions = {
         console.log("Error updating user", userResult.data.error)
         commit('application/ERROR', 'Error updating user')
         return { success: false }  
+    },
+    async reauth ({ commit }) {
+        const userResult = await axios.get('/auth/reauth')
+        if(userResult.data.status == 200 && userResult.data.result != undefined)
+        {
+            commit('LOGIN', userResult.data.result)
+            return { success: true }
+        }
+        return { success: false }
     }
 }
 

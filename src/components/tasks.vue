@@ -12,13 +12,13 @@
 
          <b-modal :active.sync="modalEditActive" has-modal-card>
             <edit-task v-bind="formProps"></edit-task>
-        </b-modal>        
+        </b-modal>
         
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import createTask from '../components/createTask'
 import editTask from '../components/editTask'
 export default {
@@ -64,6 +64,9 @@ export default {
       editTask
   },
   methods: {
+    ...mapActions('task', [
+        'loadTasks'
+    ]),
     create() {
         this.modalActive = true;
     },
@@ -79,13 +82,24 @@ export default {
   },
   watch: {
     getTasks() {
-        this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+      this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+        .map(el => {
+            el.dueDate = new Date(el.dueDate)
+            return el
+        })
     }
   },
   mounted () {
-      this.taskData = JSON.parse(JSON.stringify(this.getTasks))
-      /* eslint-disable */
-      console.log("taskData mounted")
+      this.loadTasks().then(() => {
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+        .map(el => {
+            el.dueDate = new Date(el.dueDate)
+            return el
+        })
+        /* eslint-disable */
+        console.log("taskData mounted")
+      })
+
   }
 }
 </script>

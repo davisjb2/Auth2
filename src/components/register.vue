@@ -5,9 +5,6 @@
       <div class="columns">
         <div class="column"></div>
         <div class="column">
-          <b-field label="Name" label-position="on-border">
-            <b-input type="text" name="username" v-model="user.username"></b-input>
-          </b-field>
           <b-field label="Email" label-position="on-border">
             <b-input type="email" name="email" v-model="user.email"></b-input>
           </b-field>
@@ -38,7 +35,6 @@ export default {
   data () {
     return {
       user: {
-        username: '',
         email: '',
         password: '',
         firstName: '',

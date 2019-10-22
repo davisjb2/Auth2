@@ -17,6 +17,9 @@ const mutations = {
         var index = state.tasks.findIndex(e => e.id === data.id)
         state.tasks[index] = data
     },
+    'LOAD_TASKS' (state, data) {
+        state.tasks = data
+    }
 }
 
 const actions = {
@@ -58,6 +61,18 @@ const actions = {
         commit('application/ERROR', 'Error deleting task')
         return { success: false }  
     },
+    async loadTasks ({ commit }) {
+        const tasksResult = await axios.get('/tasks')
+        if(tasksResult.data.status == 200)
+        {
+            commit('LOAD_TASKS', tasksResult.data.result)
+            return { success: true }
+        }
+        // eslint-disable-next-line
+        console.log("Error loading tasks")
+        commit('application/ERROR', 'Error loading tasks')
+        return { success: false }  
+    }
 }
 
 const getters = {

@@ -29,7 +29,8 @@ export default {
   },
   methods: {
       ...mapActions('task', [
-          'updateTask'
+          'updateTask',
+          'loadTasks'
       ]),
       doChange (evt) {
          if(evt.added) {
@@ -54,9 +55,11 @@ export default {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.lane == this.id)
     }
   },
-  mounted () {
-      this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.lane == this.id)
-  }
+  mounted () { 
+      this.loadTasks().then(() => {
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.lane == this.id)
+      })
+   }
 }
 </script>
 

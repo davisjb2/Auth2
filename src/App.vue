@@ -58,6 +58,9 @@ export default {
     ...mapActions('user', [
       'logout'
     ]),
+    ...mapActions('task', [
+      'loadTasks'
+    ]),    
     goRouter (name) {
       if(name != this.$route.name) {
         return this.$router.push({ name })
@@ -66,7 +69,9 @@ export default {
     logoutUser () {
       // eslint-disable-next-line
       console.log('logout')
-      this.logout()
+      this.logout().then(() => {
+        this.$router.push({ name: 'home' })
+      })
     }
   },
   computed: {
@@ -89,6 +94,9 @@ export default {
         })
       }
     }
+  },
+  mounted () {
+    this.loadTasks()
   }
 }
 </script>
